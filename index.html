@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3D Menu with AR - Marijoe</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+  <div class="flex flex-col md:flex-row min-h-screen">
+    
+    <!-- Menu -->
+    <aside class="w-full md:w-1/4 bg-white p-6 shadow-md">
+      <h2 class="text-2xl font-bold mb-6">Menu</h2>
+      <ul id="menu" class="space-y-4">
+        <li><button onclick="showModel('burger')" class="w-full py-2 px-4 text-left rounded-lg bg-gray-100 hover:bg-blue-100">🍔 Burger</button></li>
+        <li><button onclick="showModel('pizza')" class="w-full py-2 px-4 text-left rounded-lg bg-gray-100 hover:bg-blue-100">🍕 Pizza</button></li>
+        <li><button onclick="showModel('sushi')" class="w-full py-2 px-4 text-left rounded-lg bg-gray-100 hover:bg-blue-100">🍣 Sushi</button></li>
+      </ul>
+    </aside>
+
+    <!-- Viewer + Description -->
+    <main class="flex-1 p-6 flex flex-col items-center">
+      <div id="viewerContainer" class="w-full sm:w-4/5 bg-white rounded-lg shadow-lg p-4 mb-4">
+        <model-viewer id="modelViewer"
+          src=""
+          ios-src=""
+          ar
+          ar-modes="scene-viewer webxr quick-look"
+          reveal="auto"
+          ar-scale="auto"
+          auto-rotate
+          camera-controls
+          touch-action="pan-y"
+          class="w-full h-80 sm:h-96">
+        </model-viewer>
+        <button id="arButton"
+          onclick="document.getElementById('modelViewer').activateAR()"
+          class="mt-4 hidden px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 w-full sm:w-auto">
+          Open in AR
+        </button>
+      </div>
+
+      <div class="w-full sm:w-4/5 p-4 bg-white rounded-lg shadow-md text-center">
+        <h3 id="title" class="text-xl font-semibold mb-2">Select an item to view</h3>
+        <p id="description" class="text-gray-700 mb-1"></p>
+        <p id="dimensions" class="text-sm text-gray-500"></p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const models = {
+      burger: {
+        title: 'Burger',
+        src: 'models/burger.glb',
+        ios: 'models/burger.usdz',
+        desc: 'A delicious classic burger with lettuce, tomato, and cheese.',
+        dims: '10cm x 6cm'
+      },
+      pizza: {
+        title: 'Pizza',
+        src: 'models/pizza.glb',
+        ios: 'models/pizza.usdz',
+        desc: 'A cheesy pizza with pepperoni, mushrooms, and fresh herbs.',
+        dims: '30cm diameter'
+      },
+      sushi: {
+        title: 'Sushi',
+        src: 'models/sushi.glb',
+        ios: 'models/sushi.usdz',
+        desc: 'Fresh sushi rolls with salmon, avocado, and rice.',
+        dims: '15cm x 4cm (each piece)'
+      }
+    };
+
+    function showModel(key) {
+      const viewer = document.getElementById('modelViewer');
+      const title = document.getElementById('title');
+      const description = document.getElementById('description');
+      const dimensions = document.getElementById('dimensions');
+      const arButton = document.getElementById('arButton');
+
+      viewer.src = models[key].src;
+      viewer.setAttribute('ios-src', models[key].ios);
+      title.textContent = models[key].title;
+      description.textContent = models[key].desc;
+      dimensions.textContent = `Dimensions: ${models[key].dims}`;
+      arButton.classList.remove('hidden');
+    }
+
+    window.addEventListener('load', () => {
+      document.getElementById('arButton').classList.add('hidden');
+    });
+  </script>
+</body>
+</html>
