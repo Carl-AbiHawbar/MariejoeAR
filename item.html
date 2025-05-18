@@ -23,7 +23,7 @@
         ar
         ar-modes="scene-viewer webxr quick-look"
         reveal="auto"
-        ar-scale="auto"
+        ar-scale="fixed"
         auto-rotate
         camera-controls
         touch-action="pan-y"
@@ -53,49 +53,56 @@
         src: 'models/burger.glb',
         ios: 'models/burger.usdz',
         desc: 'A delicious classic burger with lettuce, tomato, and cheese.',
-        dims: '10cm x 6cm'
+        dims: '10cm x 6cm',
+        scale: '1 1 1'
       },
       chicken: {
         title: 'Roasted Chicken',
         src: 'models/chicken.glb',
         ios: 'models/chicken.usdz',
         desc: 'Roasted Chicken served with veggies.',
-        dims: '15cm x 7cm'
+        dims: '15cm x 7cm',
+        scale: '0.8 0.8 0.8'
       },
       beef: {
         title: 'Beef Plater',
         src: 'models/beef.glb',
         ios: 'models/beef.usdz',
         desc: 'Juicy beef cuts served with sauce and sides.',
-        dims: '20cm x 10cm'
+        dims: '20cm x 10cm',
+        scale: '0.7 0.7 0.7'
       },
       fries: {
         title: 'Combo',
         src: 'models/fries.glb',
         ios: 'models/fries.usdz',
         desc: 'Crispy golden French fries & Mixed Fried Chicken.',
-        dims: '12cm x 5cm'
+        dims: '12cm x 5cm',
+        scale: '1 1 1'
       },
       salad: {
         title: 'Salad',
         src: 'models/salad.glb',
         ios: 'models/salad.usdz',
         desc: 'Fresh salad with lettuce, tomato, and olives.',
-        dims: '15cm x 10cm'
+        dims: '15cm x 10cm',
+        scale: '1 1 1'
       },
       pizza: {
         title: 'Pizza',
         src: 'models/pizza.glb',
         ios: 'models/pizza.usdz',
         desc: 'A cheesy pizza with pepperoni, mushrooms, and fresh herbs.',
-        dims: '30cm diameter'
+        dims: '30cm diameter',
+        scale: '0.6 0.6 0.6'
       },
       sushi: {
         title: 'Sushi',
         src: 'models/sushi.glb',
         ios: 'models/sushi.usdz',
         desc: 'Fresh sushi rolls with salmon, avocado, and rice.',
-        dims: '15cm x 4cm (each piece)'
+        dims: '15cm x 4cm (each piece)',
+        scale: '1.1 1.1 1.1'
       }
     };
 
