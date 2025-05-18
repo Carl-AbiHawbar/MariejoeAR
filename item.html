@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" class="transition duration-500">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mariejoe AR Item</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition duration-500">
+
+  <!-- Back Button -->
+  <div class="p-4">
+    <a href="index.html" class="text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to Menu</a>
+  </div>
+
+  <!-- AR Model Section -->
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg">
+      <model-viewer id="modelViewer"
+        src=""
+        ios-src=""
+        ar
+        ar-modes="scene-viewer webxr quick-look"
+        reveal="auto"
+        ar-scale="auto"
+        auto-rotate
+        camera-controls
+        touch-action="pan-y"
+        class="w-full h-96 bg-white dark:bg-gray-900 rounded-lg">
+      </model-viewer>
+
+      <p id="dimensions" class="mt-2 text-sm text-gray-500 dark:text-gray-400 text-center italic"></p>
+
+      <button id="arButton"
+        onclick="document.getElementById('modelViewer').activateAR()"
+        class="mt-4 w-full px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-indigo-700">
+        Open in AR
+      </button>
+
+      <div class="mt-6 text-center">
+        <h3 id="title" class="text-2xl font-bold mb-2"></h3>
+        <p id="description" class="text-gray-700 dark:text-gray-200 text-base leading-relaxed"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const models = {
+      burger: {
+        title: 'Burger',
+        src: 'models/burger.glb',
+        ios: 'models/burger.usdz',
+        desc: 'A delicious classic burger with lettuce, tomato, and cheese.',
+        dims: '10cm x 6cm'
+      },
+      chicken: {
+        title: 'Roasted Chicken',
+        src: 'models/chicken.glb',
+        ios: 'models/chicken.usdz',
+        desc: 'Roasted Chicken served with veggies.',
+        dims: '15cm x 7cm'
+      },
+      beef: {
+        title: 'Beef Plater',
+        src: 'models/beef.glb',
+        ios: 'models/beef.usdz',
+        desc: 'Juicy beef cuts served with sauce and sides.',
+        dims: '20cm x 10cm'
+      },
+      fries: {
+        title: 'Combo',
+        src: 'models/fries.glb',
+        ios: 'models/fries.usdz',
+        desc: 'Crispy golden French fries & Mixed Fried Chicken.',
+        dims: '12cm x 5cm'
+      },
+      salad: {
+        title: 'Salad',
+        src: 'models/salad.glb',
+        ios: 'models/salad.usdz',
+        desc: 'Fresh salad with lettuce, tomato, and olives.',
+        dims: '15cm x 10cm'
+      },
+      pizza: {
+        title: 'Pizza',
+        src: 'models/pizza.glb',
+        ios: 'models/pizza.usdz',
+        desc: 'A cheesy pizza with pepperoni, mushrooms, and fresh herbs.',
+        dims: '30cm diameter'
+      },
+      sushi: {
+        title: 'Sushi',
+        src: 'models/sushi.glb',
+        ios: 'models/sushi.usdz',
+        desc: 'Fresh sushi rolls with salmon, avocado, and rice.',
+        dims: '15cm x 4cm (each piece)'
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const key = params.get('item');
+
+    if (key && models[key]) {
+      const item = models[key];
+      document.getElementById('modelViewer').src = item.src;
+      document.getElementById('modelViewer').setAttribute('ios-src', item.ios);
+      document.getElementById('title').textContent = item.title;
+      document.getElementById('description').textContent = item.desc;
+      document.getElementById('dimensions').textContent = `Dimensions: ${item.dims}`;
+    } else {
+      document.body.innerHTML = '<div class="text-center mt-20 text-xl text-red-500">Item not found.</div>';
+    }
+
+    // Dark mode on load
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+</body>
+</html>

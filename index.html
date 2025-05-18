@@ -1,98 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>3D Menu with AR - Marijoe</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AR Menu</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: radial-gradient(circle at top left, #fdfdfd 0%, #f3f4f6 100%);
+    }
+    .menu-card:hover {
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+      border-color: #ffbc00;
+    }
+    .header-image {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      background-image: url('https://lastcallcopy.com/wp-content/uploads/2021/12/EDWC-Menu-Blog-Photos-min-1024x538.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0px 0px 10px 1%;
+      opacity: 95%;
+    }
+    .header-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    }
+  </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
-  <div class="flex flex-col md:flex-row min-h-screen">
-    
-    <!-- Menu -->
-    <aside class="w-full md:w-1/4 bg-white p-6 shadow-md">
-      <h2 class="text-2xl font-bold mb-6">Menu</h2>
-      <ul id="menu" class="space-y-4">
-        <li><button onclick="showModel('burger')" class="w-full py-2 px-4 text-left rounded-lg bg-gray-100 hover:bg-blue-100">🍔 Burger</button></li>
-        <li><button onclick="showModel('pizza')" class="w-full py-2 px-4 text-left rounded-lg bg-gray-100 hover:bg-blue-100">🍕 Pizza</button></li>
-        <li><button onclick="showModel('sushi')" class="w-full py-2 px-4 text-left rounded-lg bg-gray-100 hover:bg-blue-100">🍣 Sushi</button></li>
-      </ul>
-    </aside>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition duration-500 font-sans">
 
-    <!-- Viewer + Description -->
-    <main class="flex-1 p-6 flex flex-col items-center">
-      <div id="viewerContainer" class="w-full sm:w-4/5 bg-white rounded-lg shadow-lg p-4 mb-4">
-        <model-viewer id="modelViewer"
-          src=""
-          ios-src=""
-          ar
-          ar-modes="scene-viewer webxr quick-look"
-          reveal="auto"
-          ar-scale="auto"
-          auto-rotate
-          camera-controls
-          touch-action="pan-y"
-          class="w-full h-80 sm:h-96">
-        </model-viewer>
-        <button id="arButton"
-          onclick="document.getElementById('modelViewer').activateAR()"
-          class="mt-4 hidden px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 w-full sm:w-auto">
-          Open in AR
-        </button>
-      </div>
-
-      <div class="w-full sm:w-4/5 p-4 bg-white rounded-lg shadow-md text-center">
-        <h3 id="title" class="text-xl font-semibold mb-2">Select an item to view</h3>
-        <p id="description" class="text-gray-700 mb-1"></p>
-        <p id="dimensions" class="text-sm text-gray-500"></p>
-      </div>
-    </main>
+  <div class="header-image">
+    <h1 class="header-title">🍽️AR Menu</h1>
   </div>
 
+  <div class="px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Menu Items -->
+      <div onclick="goToDetail('burger')" class="menu-card cursor-pointer p-6 border rounded-2xl bg-white dark:bg-gray-800 transition-transform transform hover:scale-105 duration-300 border-transparent">
+        <h3 class="text-2xl font-semibold mb-2 flex justify-between items-center">🍔 Burger <span class="text-sm text-gray-500 font-normal">$8.99</span></h3>
+        <p class="text-gray-600 dark:text-gray-300 text-sm">Classic burger with cheese & lettuce</p>
+      </div>
+
+      <div onclick="goToDetail('chicken')" class="menu-card cursor-pointer p-6 border rounded-2xl bg-white dark:bg-gray-800 transition-transform transform hover:scale-105 duration-300 border-transparent">
+        <h3 class="text-2xl font-semibold mb-2 flex justify-between items-center">🍗 Chicken <span class="text-sm text-gray-500 font-normal">$12.99</span></h3>
+        <p class="text-gray-600 dark:text-gray-300 text-sm">Roasted Chicken with sides</p>
+      </div>
+
+      <div onclick="goToDetail('beef')" class="menu-card cursor-pointer p-6 border rounded-2xl bg-white dark:bg-gray-800 transition-transform transform hover:scale-105 duration-300 border-transparent">
+        <h3 class="text-2xl font-semibold mb-2 flex justify-between items-center">🥩 Beef Plater <span class="text-sm text-gray-500 font-normal">$14.99</span></h3>
+        <p class="text-gray-600 dark:text-gray-300 text-sm">Beef cuts served with sauce</p>
+      </div>
+
+      <div onclick="goToDetail('fries')" class="menu-card cursor-pointer p-6 border rounded-2xl bg-white dark:bg-gray-800 transition-transform transform hover:scale-105 duration-300 border-transparent">
+        <h3 class="text-2xl font-semibold mb-2 flex justify-between items-center">🍟 Combo <span class="text-sm text-gray-500 font-normal">$9.99</span></h3>
+        <p class="text-gray-600 dark:text-gray-300 text-sm">Fries & Fried Chicken</p>
+      </div>
+
+      <div onclick="goToDetail('salad')" class="menu-card cursor-pointer p-6 border rounded-2xl bg-white dark:bg-gray-800 transition-transform transform hover:scale-105 duration-300 border-transparent">
+        <h3 class="text-2xl font-semibold mb-2 flex justify-between items-center">🥗 Salad <span class="text-sm text-gray-500 font-normal">$6.99</span></h3>
+        <p class="text-gray-600 dark:text-gray-300 text-sm">Fresh mixed salad</p>
+      </div>
+
+      <div onclick="goToDetail('pizza')" class="menu-card cursor-pointer p-6 border rounded-2xl bg-white dark:bg-gray-800 transition-transform transform hover:scale-105 duration-300 border-transparent">
+        <h3 class="text-2xl font-semibold mb-2 flex justify-between items-center">🍕 Pizza <span class="text-sm text-gray-500 font-normal">$10.99</span></h3>
+        <p class="text-gray-600 dark:text-gray-300 text-sm">Cheesy pizza with toppings</p>
+      </div>
+
+      <div onclick="goToDetail('sushi')" class="menu-card cursor-pointer p-6 border rounded-2xl bg-white dark:bg-gray-800 transition-transform transform hover:scale-105 duration-300 border-transparent">
+        <h3 class="text-2xl font-semibold mb-2 flex justify-between items-center">🍣 Sushi <span class="text-sm text-gray-500 font-normal">$13.99</span></h3>
+        <p class="text-gray-600 dark:text-gray-300 text-sm">Salmon sushi rolls</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center py-6 text-sm text-gray-500 dark:text-gray-400">
+    © 2025 Mariejoe. All rights reserved.
+  </footer>
+
   <script>
-    const models = {
-      burger: {
-        title: 'Burger',
-        src: 'models/burger.glb',
-        ios: 'models/burger.usdz',
-        desc: 'A delicious classic burger with lettuce, tomato, and cheese.',
-        dims: '10cm x 6cm'
-      },
-      pizza: {
-        title: 'Pizza',
-        src: 'models/pizza.glb',
-        ios: 'models/pizza.usdz',
-        desc: 'A cheesy pizza with pepperoni, mushrooms, and fresh herbs.',
-        dims: '30cm diameter'
-      },
-      sushi: {
-        title: 'Sushi',
-        src: 'models/sushi.glb',
-        ios: 'models/sushi.usdz',
-        desc: 'Fresh sushi rolls with salmon, avocado, and rice.',
-        dims: '15cm x 4cm (each piece)'
-      }
-    };
-
-    function showModel(key) {
-      const viewer = document.getElementById('modelViewer');
-      const title = document.getElementById('title');
-      const description = document.getElementById('description');
-      const dimensions = document.getElementById('dimensions');
-      const arButton = document.getElementById('arButton');
-
-      viewer.src = models[key].src;
-      viewer.setAttribute('ios-src', models[key].ios);
-      title.textContent = models[key].title;
-      description.textContent = models[key].desc;
-      dimensions.textContent = `Dimensions: ${models[key].dims}`;
-      arButton.classList.remove('hidden');
+    function goToDetail(key) {
+      window.location.href = `item.html?item=${key}`;
     }
-
-    window.addEventListener('load', () => {
-      document.getElementById('arButton').classList.add('hidden');
-    });
   </script>
+
 </body>
 </html>
