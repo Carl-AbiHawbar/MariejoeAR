@@ -111,7 +111,7 @@
       const item = models[key];
       modelViewer.setAttribute('src', item.src);
       modelViewer.setAttribute('ios-src', item.ios);
-      modelViewer.setAttribute('ar-scale', 'auto');
+      modelViewer.setAttribute('ar-scale', 'fixed');
       modelViewer.setAttribute('scale', item.scale);
 
       document.getElementById('title').textContent = item.title;
