@@ -18,12 +18,9 @@
   <div class="max-w-3xl mx-auto px-4">
     <div class="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg">
       <model-viewer id="modelViewer"
-        src=""
-        ios-src=""
         ar
         ar-modes="scene-viewer webxr quick-look"
         reveal="auto"
-        ar-scale="fixed"
         auto-rotate
         camera-controls
         touch-action="pan-y"
@@ -86,7 +83,7 @@
         ios: 'models/salad.usdz',
         desc: 'Fresh salad with lettuce, tomato, and olives.',
         dims: '15cm x 10cm',
-        scale: '1 1 1'
+        scale: '0.08 0.08 0.08'
       },
       pizza: {
         title: 'Pizza',
@@ -108,11 +105,15 @@
 
     const params = new URLSearchParams(window.location.search);
     const key = params.get('item');
+    const modelViewer = document.getElementById('modelViewer');
 
     if (key && models[key]) {
       const item = models[key];
-      document.getElementById('modelViewer').src = item.src;
-      document.getElementById('modelViewer').setAttribute('ios-src', item.ios);
+      modelViewer.setAttribute('src', item.src);
+      modelViewer.setAttribute('ios-src', item.ios);
+      modelViewer.setAttribute('ar-scale', 'fixed');
+      modelViewer.setAttribute('scale', item.scale);
+
       document.getElementById('title').textContent = item.title;
       document.getElementById('description').textContent = item.desc;
       document.getElementById('dimensions').textContent = `Dimensions: ${item.dims}`;
@@ -120,7 +121,7 @@
       document.body.innerHTML = '<div class="text-center mt-20 text-xl text-red-500">Item not found.</div>';
     }
 
-    // Dark mode on load
+    // Enable dark mode if user prefers it
     if (localStorage.getItem('theme') === 'dark') {
       document.documentElement.classList.add('dark');
     }
