@@ -62,6 +62,16 @@
     </div>
   </div>
 
+  <!-- AR Safety Modal -->
+  <div id="arAlertModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl shadow-xl p-6 max-w-sm text-center">
+      <h2 class="text-lg font-bold mb-4 text-yellow-800">AR Viewing Tip</h2>
+      <p class="mb-6 text-gray-700">Please keep a distance of <strong>20cm</strong> between the phone and the food for best AR experience.</p>
+      <button onclick="startAR()" class="w-full py-2 px-4 beige-button text-white font-semibold rounded-lg">Continue</button>
+    </div>
+  </div>
+
+
   <!-- Scripts -->
   <script>
     const models = {
@@ -140,6 +150,16 @@
     } else {
       document.body.innerHTML = '<div class="text-center mt-20 text-xl text-red-500">Item not found.</div>';
     }
+
+    function showARAlert() {
+      document.getElementById('arAlertModal').classList.remove('hidden');
+    }
+
+    function startAR() {
+      document.getElementById('arAlertModal').classList.add('hidden');
+      document.getElementById('modelViewer').activateAR();
+    }
+
   </script>
 </body>
 </html>
