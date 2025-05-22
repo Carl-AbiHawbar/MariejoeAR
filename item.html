@@ -50,10 +50,11 @@
       <p id="dimensions" class="mt-2 text-sm text-gray-600 text-center italic"></p>
 
       <button id="arButton"
-        onclick="document.getElementById('modelViewer').activateAR()"
+        onclick="showARAlert()"
         class="mt-4 w-full px-6 py-2 text-white font-semibold rounded-lg beige-button">
         Open in AR
       </button>
+
 
       <div class="mt-6 text-center">
         <h3 id="title" class="text-2xl font-bold mb-2"></h3>
@@ -76,12 +77,12 @@
   <script>
     const models = {
       burger: {
-        title: 'Burger Platter',
-        src: 'models/burger.glb',
-        ios: 'models/burger.usdz',
-        desc: 'A delicious classic Burger Platter with lettuce, tomato, and cheese.',
-        dims: '10cm x 6cm',
-        scale: '1 1 1'
+      title: 'Burger Platter',
+      src: 'models/burger.glb',
+      ios: 'models/burger.usdz',
+      desc: 'A delicious classic Burger Platter with lettuce, tomato, and cheese.',
+      dims: 'Plate: 30Cm x 15cm | Burger: ~10cm x ~10cm | Fries: ~100g',
+      scale: '1 1 1'
       },
       chicken: {
         title: 'Chicken & Rice',
