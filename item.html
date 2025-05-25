@@ -7,24 +7,31 @@
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    /* Custom Beige Theme */
-    body {
-      background-color: #f5f5dc; /* Beige */
-      color: #4a3f35; /* Soft brown text */
-    }
+  /* Custom Dark Gray Theme */
+  body {
+    background-color: #2b2b2b; /* Dark gray */
+    color: #e0e0e0; /* Light gray text */
+  }
 
-    .beige-card {
-      background-color: #fffaf0; /* Light cream */
-    }
+  .beige-card {
+    background-color: #3a3a3a; /* Slightly lighter dark gray for card contrast */
+  }
 
-    .beige-button {
-      background: linear-gradient(to right, #d2b48c, #c2a679); /* Tan gradient */
-    }
+  .beige-button {
+    background: linear-gradient(to right, #5a5a5a, #4a4a4a); /* Subtle gray gradient */
+    color: #ffffff; /* Button text */
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
 
-    .beige-button:hover {
-      background: linear-gradient(to right, #c2a679, #b2956f);
-    }
-  </style>
+  .beige-button:hover {
+    background: linear-gradient(to right, #4a4a4a, #3a3a3a); /* Darker on hover */
+  }
+</style>
+
 </head>
 <body class="transition duration-500">
 
@@ -47,7 +54,7 @@
         class="w-full h-96 bg-white rounded-lg">
       </model-viewer>
 
-      <p id="dimensions" class="mt-2 text-sm text-gray-600 text-center italic"></p>
+      <p id="dimensions" style="white-space: pre-line;" class="mt-2 text-sm text-center italic"></p>
 
       <button id="arButton"
         onclick="showARAlert()"
@@ -152,6 +159,8 @@
       document.getElementById('arAlertModal').classList.add('hidden');
       document.getElementById('modelViewer').activateAR();
     }
+
+    document.getElementById('dimensions').innerText = burger.dims;
 
   </script>
 </body>
